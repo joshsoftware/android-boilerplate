@@ -6,6 +6,8 @@ import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.amit.app.data.network.NetworkClient
+import com.amit.app.data.network.RetrofitApiClient
 import io.reactivex.disposables.Disposable
 
 
@@ -14,22 +16,28 @@ abstract class BaseViewModel : ViewModel(), Observable {
     @Transient
     private var mCallbacks: PropertyChangeRegistry? = null
 
-//    protected var mNetworkClient: NetworkClient = NetworkClient(RetrofitClientHelper.getNetworkServices())
+    protected var mNetworkClient: NetworkClient = NetworkClient(RetrofitApiClient.getNetworkServices())
 
     private val showProcess = MutableLiveData<Boolean>()
 
     protected lateinit var mDisposable: Disposable
 
-    protected val errorMessageData = MutableLiveData<String>()
+    protected val messageData = MutableLiveData<String>()
+
+    protected val authorizationFailedData = MutableLiveData<Boolean>()
 
     private val mIsLoading = ObservableBoolean(false)
 
-    fun getErrorMessage(): LiveData<String> {
-        return errorMessageData
+    fun getMessage(): LiveData<String> {
+        return messageData
     }
 
-    fun setErrorMessage(errorMessage: String) {
-        errorMessageData.postValue(errorMessage)
+    fun showMessage(message: String) {
+        messageData.postValue(message)
+    }
+
+    fun getAuthorizationFailedListener(): LiveData<Boolean> {
+        return authorizationFailedData;
     }
 
     override fun onCleared() {
@@ -82,6 +90,12 @@ abstract class BaseViewModel : ViewModel(), Observable {
 
     protected fun setProgress(boolean: Boolean) {
         showProcess.value = (boolean)
+    }
+
+    protected fun setHandleAuthorizationFailed(boolean: Boolean) {
+        if (boolean) {
+            authorizationFailedData.value = (boolean)
+        }
     }
 
 }

@@ -4,12 +4,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amit.app.BR
 import com.amit.app.R
+import com.amit.app.data.model.api.response.LoginResponse
 import com.amit.app.data.model.local.binding.LoginUser
 import com.amit.app.databinding.ActivityLoginBinding
 import com.amit.app.ui.base.BaseActivity
-import com.amit.app.ui.main.ListActivity
-import com.amit.app.ui.main.ListWithDatabindingActivity
+import com.amit.app.ui.home.HomeActivity
 import com.amit.app.util.ActivityManager
+import com.amit.app.util.DebugLog
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun getToolbarTitle(): String? {
@@ -32,21 +33,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         mViewDataBinding!!.loginUser = LoginUser()
     }
 
-    private val navigateObserver: Observer<Int> = Observer { t ->
-        when (t) {
-            1 -> {
-                ActivityManager.startActivity(this@LoginActivity, ListActivity::class.java)
-                startFwdAnimation(this@LoginActivity)
-            }
-            else -> {
-
-            }
-        }
+    override fun initLiveDataObservables() {
+        mViewModel.getLoginResponse().observe(this, loginResponseObserver)
     }
 
-    override fun initLiveDataObservables() {
-        mViewModel.getErrorMessage().observe(this, errorMessageObserver)
-        mViewModel.getPageRedirection().observe(this, navigateObserver)
+    private val loginResponseObserver: Observer<LoginResponse> = Observer { t ->
+        DebugLog.e(t.token)
+
+        //navigating to Home activity
+        ActivityManager.startActivity(this@LoginActivity, HomeActivity::class.java)
+        startFwdAnimation(this@LoginActivity)
     }
 
 }

@@ -1,10 +1,11 @@
-package com.amit.app.ui.main
+package com.amit.app.ui.main.listingwithdatabinding
 
 import androidx.lifecycle.ViewModelProviders
 import com.amit.app.BR
 import com.amit.app.R
 import com.amit.app.databinding.ActivityListWithDatabindingBinding
 import com.amit.app.ui.base.BaseActivity
+import com.amit.app.ui.main.MainViewModel
 
 class ListWithDatabindingActivity : BaseActivity<ActivityListWithDatabindingBinding, MainViewModel>() {
 
@@ -20,7 +21,7 @@ class ListWithDatabindingActivity : BaseActivity<ActivityListWithDatabindingBind
     }
 
     override fun getToolbarTitle(): String? {
-        return "Home"
+        return "UserList RecyclerBaseAdapter"
     }
 
     override fun getLayoutId(): Int {

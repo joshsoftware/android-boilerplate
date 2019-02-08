@@ -1,7 +1,7 @@
 package com.amit.app.data.network
 
 
-import android.content.Context
+import com.amit.app.BuildConfig
 import com.amit.app.util.ApplicationConstant
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitApiClient {
 
-    private var mNetworkServices: NetworkServices? = null
+    var mNetworkServices: NetworkServices? = null
 
     private var httpClient: OkHttpClient.Builder? = null
 
@@ -27,7 +27,7 @@ object RetrofitApiClient {
         httpClient = OkHttpClient.Builder().apply {
             addInterceptor(HeaderInterceptor())
             addInterceptor(HttpLoggingInterceptor().apply {
-                //                level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+                level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
                 level = HttpLoggingInterceptor.Level.BODY
 
             })

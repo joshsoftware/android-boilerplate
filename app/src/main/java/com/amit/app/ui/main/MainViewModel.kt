@@ -1,54 +1,57 @@
 package com.amit.app.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.amit.app.BR
-import com.amit.app.data.model.local.db.Student
+import com.amit.app.data.model.api.response.User
+import com.amit.app.data.model.api.response.UserListResponse
+import com.amit.app.data.network.ErrorUtils
 import com.amit.app.ui.base.BaseViewModel
-import java.util.*
+import retrofit2.Response
+import java.util.ArrayList
 
 class MainViewModel : BaseViewModel() {
-    var mDataList: MutableList<Student> = ArrayList()
-    val TYPE_STUDENT_1 = 1
-    val TYPE_STUDENT_2 = 2
-    val TYPE_STUDENT_3 = 3
-    val TYPE_STUDENT_4 = 4
+    val userlistResponse = MutableLiveData<UserListResponse>()
+    var mDataList: MutableList<User> = ArrayList()
 
     init {
-        setData()
+        getUserList()
     }
 
-    private fun setData() {
-        mDataList.clear()
-        for (i in 0..15) {
-            var student: Student
-            if (i % 2 == 0) {
-                student = Student(TYPE_STUDENT_1, "Student 1", i)
-            } else if (i % 3 == 0) {
-                student = Student(TYPE_STUDENT_2, "Student 2", i)
-            } else if (i % 5 == 0) {
-                student = Student(TYPE_STUDENT_3, "Student 3", i)
-            } else {
-                student = Student(TYPE_STUDENT_4, "Student 4", i)
-            }
-            mDataList.add(student)
-        }
-        notifyPropertyChanged(BR._all)
+    private fun getUserList() {
+        setProgress(true)
+        mDisposable = mNetworkClient.getUsersApiCall(this)!!
     }
 
-    fun getDataList(): List<Student> {
-        mDataList.clear()
-        for (i in 0..15) {
-            var student: Student
-            if (i % 2 == 0) {
-                student = Student(TYPE_STUDENT_1, "Student 4", i)
-            } else if (i % 3 == 0) {
-                student = Student(TYPE_STUDENT_2, "Student 5", i)
-            } else if (i % 5 == 0) {
-                student = Student(TYPE_STUDENT_3, "Student 6", i)
-            } else {
-                student = Student(TYPE_STUDENT_4, "Student 7", i)
-            }
-            mDataList.add(student)
-        }
-        return mDataList
+    fun getUserListResponse(): LiveData<UserListResponse> {
+        return userlistResponse
     }
+
+    fun handleUserListResponse(response: Response<UserListResponse>?) {
+        when {
+            response!!.isSuccessful -> {
+//                showMessage(response?.body()?.message)
+                mDataList.addAll(response.body()!!.data)
+                notifyPropertyChanged(BR._all)
+                userlistResponse.postValue(response!!.body())
+            }
+
+            response.code() == 401 -> {
+                showMessage(ErrorUtils.getErrorMessage(response))
+                setHandleAuthorizationFailed(true)
+            }
+
+            else -> {
+                val errorResponse = ErrorUtils.getErrorMessage(response)
+                showMessage(errorResponse)
+            }
+        }
+        setProgress(false)
+    }
+
+    fun handleApiErrors(failureMessage: String) {
+        showMessage(failureMessage)
+        setProgress(false)
+    }
+
 }

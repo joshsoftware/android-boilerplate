@@ -30,7 +30,7 @@ public enum Environment {
     }, PRODUCTION {
         @Override
         public String getBaseUrl() {
-            return "";
+            return "https://reqres.in/";
         }
 
         @Override

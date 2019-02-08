@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.amit.app.ui.main.MainViewModel" />
+            type="com.amit.app.ui.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.listingwithdatabinding.ListWithDatabindingActivity">
+        tools:context=".ui.home.HomeActivity">
 
         <include
             android:id="@+id/toolbar_layout"
@@ -22,21 +22,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewStudents"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <Button
+            android:id="@+id/butttonListingNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:dataList="@{viewModel.mDataList}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Normal listing"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
-            tools:listitem="@layout/item_recycler_list_item" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+
+        <Button
+            android:id="@+id/buttonListingDatabinding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Listing using Databinding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/butttonListingNormal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

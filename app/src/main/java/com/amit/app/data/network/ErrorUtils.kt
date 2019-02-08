@@ -35,6 +35,8 @@ object ErrorUtils {
             Gson().fromJson(error, JsonObject::class.java)
         if (errorMsg.has("message")) {
             return errorMsg.get("message").asString
+        } else if (errorMsg.has("error")) {
+            return errorMsg.get("error").asString
         } else {
             return response.message()
         }

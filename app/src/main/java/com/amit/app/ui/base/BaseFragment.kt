@@ -64,7 +64,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         mViewDataBinding!!.setVariable(getBindingVariable(), mViewModel)
         mViewDataBinding!!.executePendingBindings()
         mRootView = mViewDataBinding!!.root
-        mViewModel.getErrorMessage().observe(this, errorMessageObserver)
+        mViewModel.getMessage().observe(this, errorMessageObserver)
         mViewModel.getProgress().observe(this, progressObserver)
         init()
         initLiveDataObservables()

@@ -15,6 +15,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.amit.app.R
 import com.amit.app.custom.CustomProgressDialog
+import retrofit2.Response
+import retrofit2.Retrofit
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatActivity() {
 
@@ -82,6 +84,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         init() // In all activities, this method will be called first.
         initLiveDataObservables()
         mViewModel.getProgress().observe(this, progressObserver)
+        mViewModel.getMessage().observe(this, messageObserver)
+        mViewModel.getAuthorizationFailedListener().observe(this, authorizationFailedObserver)
     }
 
     private fun initializeToolbar() {
@@ -217,8 +221,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     /**
      * To handle error
      */
-    protected val errorMessageObserver: Observer<String> = Observer<String> { t ->
-//        Logger.e(BaseFragment::class.java, t.toString())
+    protected val messageObserver: Observer<String> = Observer<String> { t ->
+        //        Logger.e(BaseFragment::class.java, t.toString())
         showToast(t.toString())
     }
     private val progressObserver: Observer<Boolean> = Observer<Boolean> {
@@ -226,5 +230,9 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
             showLoader()
         else
             hideLoader()
+    }
+
+    protected val authorizationFailedObserver: Observer<Boolean> = Observer {
+        handleAuthorizationFailed()
     }
 }

@@ -13,7 +13,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        RetrofitApiClient.getRetrofitClient()
+        RetrofitApiClient.getRetrofitClient()
         mAppContext = applicationContext
     }
 }
