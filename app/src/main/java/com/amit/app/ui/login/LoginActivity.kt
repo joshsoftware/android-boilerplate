@@ -31,6 +31,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun init() {
         mViewDataBinding!!.loginUser = LoginUser()
+        mViewDataBinding!!.loginUser?.email = "eve.holt@reqres.in"
+        mViewDataBinding!!.loginUser?.password = "cityslicka"
     }
 
     override fun initLiveDataObservables() {
@@ -41,7 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         DebugLog.e(t.token)
 
         //navigating to Home activity
-        ActivityManager.startActivity(this@LoginActivity, HomeActivity::class.java)
+        ActivityManager.startFreshActivityClearStack(this@LoginActivity, HomeActivity::class.java)
         startFwdAnimation(this@LoginActivity)
     }
 
