@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -8,68 +7,34 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!--Circular progress view-->
+    <declare-styleable name="CircularProgressView">
+        <attr name="cpv_progress" format="float" />
+        <attr name="cpv_maxProgress" format="float" />
+        <attr name="cpv_animDuration" format="integer" />
+        <attr name="cpv_animSwoopDuration" format="integer" />
+        <attr name="cpv_animSyncDuration" format="integer" />
+        <attr name="cpv_color" format="color" />
+        <attr name="cpv_thickness" format="dimension" />
+        <attr name="cpv_indeterminate" format="boolean" />
+        <attr name="cpv_animAutostart" format="boolean" />
+        <attr name="cpv_animSteps" format="integer" />
+        <attr name="cpv_startAngle" format="float" />
+    </declare-styleable>
+
+
+    <!-- Style for custom progress dialog-->
+    <style name="progress_Custom_Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="AppThemeDark.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
-
-    <style name="TransparentToolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="windowActionBarOverlay">true</item>
-    </style>
-
-    <style name="Splash" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="Splash.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="TextLabel" parent="Widget.Design.TextInputLayout">
-        <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@color/gray</item>
-        <item name="android:textSize">@dimen/textSize_14</item>
-        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/gray</item>
-        <item name="colorControlActivated">@color/gray</item>
-    </style>
-
-    <!--Toolbar Style-->
-    <style name="toolbar_title">
-        <item name="android:textSize">@dimen/textSize_18</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-    </style>
-
-    <style name="BlueButtonRounded" parent="@style/AppButtonStyle">
-        <item name="android:background">@drawable/filled_rounded_edges_box_blue</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:textAllCaps">false</item>
-    </style>
-
-    <style name="BlueButtonNormal" parent="@style/AppButtonStyle">
-        <item name="android:background">@drawable/filled_box_blue</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:textAllCaps">false</item>
-    </style>
-
-    <style name="AppButtonStyle" parent="@style/Widget.AppCompat.Button">
-        <item name="android:background">@drawable/filled_rounded_edges_box_blue</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:fontFamily">"sans-serif-light"</item>
-        <item name="android:textAllCaps">false</item>
-    </style>
 </resources>

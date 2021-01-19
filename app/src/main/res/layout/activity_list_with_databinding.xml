@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.amit.app.ui.main.MainViewModel" />
+            type="com.amit.ui.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,8 +16,8 @@
         tools:context=".ui.main.listingwithdatabinding.ListWithDatabindingActivity">
 
         <include
-            android:id="@+id/toolbar_layout"
-            layout="@layout/layout_toolbar"
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,17 +26,17 @@
             android:id="@+id/recyclerViewStudents"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
             app:dataList="@{viewModel.mDataList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
-            tools:listitem="@layout/item_recycler_list_item" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:listitem="@layout/item_recycler_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

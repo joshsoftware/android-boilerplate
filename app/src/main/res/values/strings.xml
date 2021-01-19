@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Mvvm</string>
+    <string name="app_name">base_architecture_amit</string>
+    <string name="hyphen">-</string>
+    <string name="decreased_volume">Decreased Volume</string>
 </resources>
